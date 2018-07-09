@@ -2,6 +2,7 @@ package org.oasispay.paysdk.activities;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.net.Uri;
 import android.net.http.SslError;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -90,6 +91,7 @@ public class PaySDKActivity extends BaseActivity {
      */
     @JavascriptInterface
     public void payOrderJavascriptCallBack(final String oid, String windowType) {
+        LogUtil.e("payOrderJavascriptCallBack", "oid:"+oid+"--window"+windowType);
 
         switch (windowType) {
             case "WEBVIEW":
@@ -103,11 +105,22 @@ public class PaySDKActivity extends BaseActivity {
             case "SDK":
                 break;
             case "SYSTEMBROWSER":
+                Intent intent= new Intent();
+                intent.setAction("android.intent.action.VIEW");
+                Uri url = Uri.parse(PaySDKConstant.TO_CHANNAL_PAY_URL + "?oid=" + oid);
+                intent.setData(url);
+                startActivity(intent);
                 break;
             default:
                 break;
         }
         PaySDKUtils.getDBManger().add(oid);
+
+    }
+
+    @JavascriptInterface
+    public String checkSDK() {
+        return "ok";
     }
 
     private void createWebView() {

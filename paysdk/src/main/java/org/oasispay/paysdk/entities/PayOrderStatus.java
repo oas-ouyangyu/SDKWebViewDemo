@@ -32,18 +32,16 @@ public class PayOrderStatus extends TimerTask {
 
         for (final WeakHashMap.Entry entry: oidList.entrySet()
              ) {
-            LogUtil.e("oidList:db", "oid:"+entry.getKey()+"--create_time"+entry.getValue());
+            //LogUtil.e("oidList:db", "oid:"+entry.getKey()+"--create_time"+entry.getValue());
 
             if (System.currentTimeMillis() - Long.parseLong((String) entry.getValue()) < 172800000) {
-                HttpUtil.instance().getPayOrderStatus(PaySDKConstant.PAY_ORDER_STATUS_URL + "?oid=" + (String) entry.getKey(), new CallbackResultForActivity() {
+                HttpUtil.instance().getPayOrderStatus(PaySDKConstant.PAY_ORDER_STATUS_URL + "?order_id=" + (String) entry.getKey(), new CallbackResultForActivity() {
                     @Override
                     public void setResult(String result) {
                         try {
                             JSONObject jsonObject = new JSONObject(result);
 
-                            jsonObject.get("code");
-                            jsonObject.get("message");
-                            if (jsonObject.get("message").equals("success")) {
+                            if ((Integer)jsonObject.get("code") == 200 && jsonObject.get("message").equals("success")) {
                                 PaySDKUtils.noticePayResult(PaySDKConstant.RESULT_SUCCESS, "success", entry.getKey());
                                 PaySDKUtils.getDBManger().deleteOldPerson((String) entry.getKey());
 

@@ -40,13 +40,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         @Override
         public void getPayInfo(PayInfoCallBack payInfoCallBack) {
             PayUserInfo payUserInfo = new PayUserInfo();
-            payUserInfo.setUserId("fdsfdf0");
-            payUserInfo.setExtraParams("fdsfdf0");
-            payUserInfo.setRoleId("fdsfdf0");
-            payUserInfo.setRoleName("fdsfdf0");
-            payUserInfo.setServerId("fdsfdf0");
-            payUserInfo.setMerchant_id("fdsfdf0");
-            payUserInfo.setMerchant_shop_code("fdsfdf0");
+            payUserInfo.setUserId("100002155542648");
+            payUserInfo.setExtraParams("");
+            payUserInfo.setRoleId("");
+            payUserInfo.setRoleName("");
+            payUserInfo.setServerId("1");
+            payUserInfo.setMerchant_id("21828a6e-276b-11e8-b9d5-06564a6e2e18");
+            payUserInfo.setMerchant_shop_code("test");
             payInfoCallBack.setPayUserInfo(payUserInfo);
         }
 

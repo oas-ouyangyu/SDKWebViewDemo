@@ -12,10 +12,15 @@ import org.oasispay.paysdk.utils.SystemCache;
 import java.util.Timer;
 
 /**
- * created by ouyangyu on 2018/5/16
+ * SDK平台支付
  */
 public class PaySDKPlatform {
 
+    /**
+     * 去下单支付
+     * @param c
+     * @param productId 支付商品的唯一标识ID
+     */
     public static void toPayActivity(Activity c, String productId){
 
         Bundle bundle = new Bundle();
@@ -24,6 +29,11 @@ public class PaySDKPlatform {
         intent.putExtras(bundle);
         c.startActivity(intent);
     }
+
+    /**
+     * 初始化
+     * @param paySDKCallBack
+     */
     public static void setPayInterface(PaySDKCallBack paySDKCallBack){
         if (null == SystemCache.paySDKCallBack)
             SystemCache.paySDKCallBack = paySDKCallBack;

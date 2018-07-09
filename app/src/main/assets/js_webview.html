@@ -6,7 +6,11 @@
 	 <title>Ling</title>
 <script>
  function jsCallAndroid(){
-		payOrderInfo.payOrderJavascriptCallBack('1051sdfdsfdfdsfdfd',"WEBVIEW");
+        document.getElementById("helloweb").innerHTML = payOrderInfo.checkSDK();
+
+        if (payOrderInfo.checkSDK()){
+            payOrderInfo.payOrderJavascriptCallBack('1051sdfdsfdfdsfdfd',"SYSTEMBROWSER");
+        }
 }
 
 </script>
